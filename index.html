@@ -2964,6 +2964,280 @@
       }
     }
 
+  
+    .boot-subtitle, .boot-card .mono-sub, .boot-meta {
+      word-break: normal;
+    }
+
+    @media (max-width: 720px) {
+      .boot-subtitle, .boot-card .mono-sub, .boot-meta {
+        font-size: 12px !important;
+        line-height: 1.45 !important;
+      }
+    }
+
+  
+    /* Advanced standout sections */
+    .advanced-lab {
+      padding: 92px 0;
+      position: relative;
+    }
+
+    .advanced-grid {
+      display: grid;
+      gap: 22px;
+    }
+
+    .sim-card,
+    .role-engine,
+    .health-dashboard,
+    .why-panel,
+    .failure-panel {
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.045);
+      border-radius: 34px;
+      padding: 24px;
+      backdrop-filter: blur(22px);
+      box-shadow: 0 28px 90px rgba(0,0,0,.22);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sim-card::before,
+    .role-engine::before,
+    .health-dashboard::before,
+    .why-panel::before,
+    .failure-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(52,211,153,.10), transparent 32%),
+        radial-gradient(circle at 85% 0%, rgba(167,139,250,.09), transparent 30%);
+      pointer-events: none;
+    }
+
+    .sim-card > *,
+    .role-engine > *,
+    .health-dashboard > *,
+    .why-panel > *,
+    .failure-panel > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .sim-flow {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(110px, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .sim-step {
+      min-height: 104px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.20);
+      padding: 14px;
+      cursor: pointer;
+      transition: .24s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .sim-step:hover,
+    .sim-step.active {
+      transform: translateY(-4px);
+      border-color: rgba(52,211,153,.45);
+      background: rgba(52,211,153,.08);
+      box-shadow: 0 16px 45px rgba(52,211,153,.08);
+    }
+
+    .sim-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: white;
+      background: linear-gradient(135deg, rgba(52,211,153,.72), rgba(167,139,250,.72));
+    }
+
+    .sim-title {
+      color: var(--soft);
+      font-weight: 800;
+      font-size: 13px;
+      line-height: 1.25;
+    }
+
+    .sim-output {
+      margin-top: 18px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,.09);
+      background: rgba(0,0,0,.22);
+      padding: 18px;
+      color: var(--soft);
+      line-height: 1.6;
+      min-height: 92px;
+    }
+
+    .sim-output strong {
+      color: white;
+    }
+
+    .role-tabs,
+    .why-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 18px 0;
+    }
+
+    .role-tab,
+    .why-btn,
+    .terminal-command {
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.045);
+      color: var(--soft);
+      border-radius: 999px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-family: var(--mono);
+      font-size: 12px;
+      transition: .22s ease;
+    }
+
+    .role-tab:hover,
+    .role-tab.active,
+    .why-btn:hover,
+    .why-btn.active,
+    .terminal-command:hover {
+      border-color: rgba(244,208,111,.42);
+      color: white;
+      background: rgba(244,208,111,.085);
+      transform: translateY(-2px);
+    }
+
+    .role-result {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .role-box,
+    .health-metric,
+    .failure-card {
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.09);
+      background: rgba(0,0,0,.18);
+      padding: 16px;
+    }
+
+    .role-box h4,
+    .failure-card h4 {
+      margin: 0 0 8px;
+      color: white;
+      font-size: 14px;
+    }
+
+    .role-box p,
+    .failure-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .health-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(120px, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .metric-label {
+      font-family: var(--mono);
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: 10px;
+      margin-bottom: 8px;
+    }
+
+    .metric-value {
+      color: white;
+      font-weight: 900;
+      font-size: 21px;
+    }
+
+    .metric-note {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 6px;
+    }
+
+    .status-dot {
+      display: inline-block;
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--emerald);
+      box-shadow: 0 0 16px rgba(52,211,153,.9);
+      margin-right: 7px;
+      animation: liveBlink 1.4s ease-in-out infinite;
+    }
+
+    .why-answer {
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,.09);
+      background: rgba(0,0,0,.20);
+      padding: 18px;
+      color: var(--soft);
+      line-height: 1.65;
+      min-height: 112px;
+    }
+
+    .failure-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(150px, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .terminal-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.20);
+    }
+
+    .terminal-command {
+      border-radius: 14px;
+    }
+
+    @media (max-width: 1120px) {
+      .sim-flow { grid-template-columns: repeat(3, 1fr); }
+      .role-result { grid-template-columns: 1fr; }
+      .health-grid { grid-template-columns: repeat(3, 1fr); }
+      .failure-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+      .sim-flow,
+      .health-grid,
+      .failure-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
   </style>
 </head>
 
@@ -2975,7 +3249,7 @@
           <div class="boot-mark">MT</div>
           <div class="boot-title">
             <strong>Mohan AI Runtime v4.5</strong>
-            <span>portfolio_interface.initialize()</span>
+            <span>portfolio_interface.initialize() · V4.5 = 4.5+ yrs AI/ML systems shipped</span>
           </div>
         </div>
         <div class="boot-status" id="bootStatus">INITIALIZING</div>
@@ -3020,6 +3294,7 @@
       <nav class="nav-links">
         <a href="#experience">Work Experience</a>
         <a href="#role-fit">Role Fit</a>
+        <a href="#system-lab">System Lab</a>
         <a href="#projects">Projects</a>
         <a href="#architecture">Architecture</a>
         <a href="#stack">Stack</a>
@@ -3194,6 +3469,103 @@
         </div>
       </div>
     </section>
+
+    <section id="system-lab" class="advanced-lab">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="kicker">System Lab</div>
+            <h2 class="section-title">Interactive proof of how I think through AI systems.</h2>
+          </div>
+          <p class="section-desc">
+            A hands-on layer for recruiters and engineers: architecture flow, role matching,
+            production health, build decisions, and failure-mode thinking.
+          </p>
+        </div>
+
+        <div class="advanced-grid">
+          <div class="sim-card scroll-reveal">
+            <div class="kicker">Architecture Simulator</div>
+            <h3>Click through the agentic AI + RAG runtime.</h3>
+            <p class="section-desc">This shows how a real request moves through planning, retrieval, serving, evaluation, and monitoring.</p>
+
+            <div class="sim-flow" id="simFlow">
+              <button class="sim-step active" data-step="0"><span class="sim-num">01</span><span class="sim-title">User Query</span></button>
+              <button class="sim-step" data-step="1"><span class="sim-num">02</span><span class="sim-title">LangGraph Planner</span></button>
+              <button class="sim-step" data-step="2"><span class="sim-num">03</span><span class="sim-title">FAISS RAG</span></button>
+              <button class="sim-step" data-step="3"><span class="sim-num">04</span><span class="sim-title">FastAPI Serving</span></button>
+              <button class="sim-step" data-step="4"><span class="sim-num">05</span><span class="sim-title">Evaluation + Guardrails</span></button>
+              <button class="sim-step" data-step="5"><span class="sim-num">06</span><span class="sim-title">Monitoring</span></button>
+            </div>
+
+            <div class="sim-output" id="simOutput">
+              <strong>User Query:</strong> A recruiter or analyst asks a question. The system treats it as a task, not just a prompt.
+            </div>
+
+            <div class="terminal-strip">
+              <button class="terminal-command" data-jump="#role-fit">run --role-fit</button>
+              <button class="terminal-command" data-jump="#projects">run --projects</button>
+              <button class="terminal-command" data-jump="#architecture">run --architecture</button>
+              <button class="terminal-command" data-jump="#contact">run --contact</button>
+            </div>
+          </div>
+
+          <div class="role-engine scroll-reveal">
+            <div class="kicker">Role Match Engine</div>
+            <h3>Select a role and see the strongest proof points.</h3>
+            <div class="role-tabs" id="roleTabs">
+              <button class="role-tab active" data-role="ai">AI Engineer</button>
+              <button class="role-tab" data-role="genai">GenAI Engineer</button>
+              <button class="role-tab" data-role="mlops">MLOps Engineer</button>
+              <button class="role-tab" data-role="ml">Machine Learning Engineer</button>
+              <button class="role-tab" data-role="prompt">AI Prompt Engineer</button>
+            </div>
+            <div class="role-result" id="roleResult"></div>
+          </div>
+
+          <div class="health-dashboard scroll-reveal">
+            <div class="kicker">Production Health Dashboard</div>
+            <h3><span class="status-dot"></span>Runtime signals from the systems I highlight.</h3>
+            <div class="health-grid">
+              <div class="health-metric"><div class="metric-label">Uptime</div><div class="metric-value">99.9%</div><div class="metric-note">production reliability</div></div>
+              <div class="health-metric"><div class="metric-label">Latency</div><div class="metric-value">-42%</div><div class="metric-note">service improvement</div></div>
+              <div class="health-metric"><div class="metric-label">Resolution</div><div class="metric-value">-60%</div><div class="metric-note">analyst time</div></div>
+              <div class="health-metric"><div class="metric-label">Fraud ML</div><div class="metric-value">94%</div><div class="metric-note">precision</div></div>
+              <div class="health-metric"><div class="metric-label">Clinical NLP</div><div class="metric-value">91%</div><div class="metric-note">AUC</div></div>
+              <div class="health-metric"><div class="metric-label">Models</div><div class="metric-value">12</div><div class="metric-note">production models</div></div>
+            </div>
+          </div>
+
+          <div class="why-panel scroll-reveal">
+            <div class="kicker">Ask why I built it this way</div>
+            <h3>Decision-making, not just tool names.</h3>
+            <div class="why-buttons" id="whyButtons">
+              <button class="why-btn active" data-why="langgraph">Why LangGraph?</button>
+              <button class="why-btn" data-why="faiss">Why FAISS?</button>
+              <button class="why-btn" data-why="fastapi">Why FastAPI?</button>
+              <button class="why-btn" data-why="monitoring">Why monitoring?</button>
+              <button class="why-btn" data-why="rebuild">What would I improve?</button>
+            </div>
+            <div class="why-answer" id="whyAnswer">
+              LangGraph matters when the workflow is more than one prompt. It lets the system plan, retrieve, route, validate, retry, and keep state across an agentic workflow.
+            </div>
+          </div>
+
+          <div class="failure-panel scroll-reveal">
+            <div class="kicker">Failure Mode Thinking</div>
+            <h3>What I check before shipping AI systems.</h3>
+            <div class="failure-grid">
+              <div class="failure-card"><h4>Retrieval Miss</h4><p>Wrong or weak context can produce confident but useless answers, so retrieval quality and evals matter.</p></div>
+              <div class="failure-card"><h4>Hallucination</h4><p>Outputs need grounding, guardrails, and fallback behavior when evidence is missing.</p></div>
+              <div class="failure-card"><h4>Latency Spike</h4><p>Serving needs batching, caching, routing, and FastAPI-level performance thinking.</p></div>
+              <div class="failure-card"><h4>Model Drift</h4><p>Production systems need thresholds, monitoring, alerts, and rollback paths.</p></div>
+              <div class="failure-card"><h4>Human Review</h4><p>High-risk workflows need escalation and human-in-the-loop validation, not blind automation.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
 
     <section id="projects" class="scroll-reveal">
       <div class="container">
@@ -4435,6 +4807,102 @@
 
   window.addEventListener('load', function () {
     setTimeout(initViewModeToggle, 150);
+  });
+})();
+</script>
+
+
+<script id="advancedStandoutFeatures">
+(function () {
+  const simCopy = [
+    '<strong>User Query:</strong> A recruiter or analyst asks a question. The system treats it as a task, not just a prompt.',
+    '<strong>LangGraph Planner:</strong> The workflow decides whether to retrieve, call a tool, validate, retry, or answer directly.',
+    '<strong>FAISS RAG:</strong> Relevant context is retrieved before generation so the response stays grounded in actual project/system evidence.',
+    '<strong>FastAPI Serving:</strong> The AI workflow is exposed as a service with latency, reliability, and integration concerns in mind.',
+    '<strong>Evaluation + Guardrails:</strong> The system checks grounding, handles weak context, and avoids pretending when evidence is missing.',
+    '<strong>Monitoring:</strong> Production health is tracked through drift, latency, uptime, alerts, and rollback-ready deployment practices.'
+  ];
+
+  document.querySelectorAll('.sim-step').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      const index = parseInt(btn.dataset.step || '0', 10);
+      document.querySelectorAll('.sim-step').forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      const out = document.getElementById('simOutput');
+      if (out) out.innerHTML = simCopy[index] || simCopy[0];
+    });
+  });
+
+  const roleData = {
+    ai: {
+      project: 'Agentic knowledge assistant + clinical/fraud ML workflows',
+      proof: 'RAG, agents, FastAPI inference, MLflow/Kubeflow, monitoring',
+      metric: '60% resolution-time reduction, 42% latency improvement, 99.9% uptime'
+    },
+    genai: {
+      project: 'LangChain/LangGraph orchestration with FAISS-grounded RAG',
+      proof: 'Planner/retriever/tool workflow, prompt control, grounding, guardrails',
+      metric: 'Agentic assistant tied to measurable analyst productivity'
+    },
+    mlops: {
+      project: 'Production model operations across 12 models',
+      proof: 'Docker, Kubernetes, Terraform CI/CD, Prometheus/Grafana, drift checks',
+      metric: '99.9% uptime and monitored production AI workflows'
+    },
+    ml: {
+      project: 'Clinical NLP, fraud detection, forecasting, anomaly detection',
+      proof: 'PyTorch, Scikit-learn, Neo4j, MLflow, Kubeflow, cloud ML workflows',
+      metric: '94% fraud precision, 91% clinical AUC, 96% forecasting accuracy'
+    },
+    prompt: {
+      project: 'Guided portfolio assistant + agentic workflow design',
+      proof: 'Prompt routing, safe fallback behavior, grounded answers, recruiter UX',
+      metric: 'Designed for clear, accurate, role-specific portfolio answers'
+    }
+  };
+
+  function renderRole(role) {
+    const data = roleData[role] || roleData.ai;
+    const result = document.getElementById('roleResult');
+    if (!result) return;
+    result.innerHTML =
+      '<div class="role-box"><h4>Best project proof</h4><p>' + data.project + '</p></div>' +
+      '<div class="role-box"><h4>Technical signal</h4><p>' + data.proof + '</p></div>' +
+      '<div class="role-box"><h4>Impact to mention</h4><p>' + data.metric + '</p></div>';
+  }
+
+  renderRole('ai');
+
+  document.querySelectorAll('.role-tab').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.role-tab').forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      renderRole(btn.dataset.role);
+    });
+  });
+
+  const whyData = {
+    langgraph: 'LangGraph matters when the workflow is more than one prompt. It lets the system plan, retrieve, route, validate, retry, and keep state across an agentic workflow.',
+    faiss: 'FAISS is useful when retrieval speed and control matter. It keeps the RAG layer explainable: chunk, embed, search, rank, and evaluate instead of treating retrieval as magic.',
+    fastapi: 'FastAPI turns models and agents into services other systems can actually call. That means thinking about latency, payloads, error handling, versioning, and uptime.',
+    monitoring: 'AI systems drift, retrieval quality changes, and latency spikes. Monitoring makes the system production-ready instead of a polished notebook demo.',
+    rebuild: 'If I rebuilt the agentic assistant today, I would strengthen offline eval sets, add clearer failure categories, improve model-cost routing, and capture better user feedback loops.'
+  };
+
+  document.querySelectorAll('.why-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.why-btn').forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      const answer = document.getElementById('whyAnswer');
+      if (answer) answer.textContent = whyData[btn.dataset.why] || whyData.langgraph;
+    });
+  });
+
+  document.querySelectorAll('.terminal-command').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      const target = document.querySelector(btn.dataset.jump);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   });
 })();
 </script>
