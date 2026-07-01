@@ -1,48 +1,32 @@
-# Mohan AI Portfolio — Live Assistant Version
+# Mohan AI Portfolio
 
-This package is ready for GitHub + Vercel.
+A personal AI/ML engineering portfolio for Mohan Savendra Tikkireddy.
 
-## Files
+The site is designed to make technical work easier to explore through an interactive portfolio experience instead of a static resume page.
 
-- `index.html` — portfolio frontend
-- `api/chat.js` — Vercel serverless function for the live assistant
-- `portfolio-context.json` — verified context the assistant must use
-- `package.json` — dependencies and local dev command
-- `.gitignore` — prevents secrets and node_modules from being committed
+## What it includes
 
-## Important
+- Recruiter and engineer view modes
+- Project case studies
+- Interactive system lab
+- Architecture simulator
+- Role-fit engine
+- Production-style health dashboard
+- Guided portfolio assistant
+- Resume download
+- Contact links
 
-Do not put your OpenAI API key inside `index.html`.
-Add it later in Vercel as an Environment Variable:
+## Focus areas
 
-```txt
-OPENAI_API_KEY=your_key_here
-```
+- Agentic AI
+- Retrieval-Augmented Generation
+- Clinical NLP
+- Fraud detection
+- Production MLOps
+- Model monitoring
+- FastAPI serving
+- Cloud and deployment workflows
 
-Optional model override:
+## Live site
 
-```txt
-OPENAI_MODEL=gpt-5.4-mini
-```
-
-## Assets / pictures
-
-No separate pictures are required for the current version.
-
-- The resume download is embedded inside `index.html`.
-- The visuals are CSS/SVG/HTML-based.
-- Stack logos load from Simple Icons CDN.
-- There is no required `images/` folder right now.
-
-## Local test
-
-```bash
-npm install
-npx vercel dev
-```
-
-Then open:
-
-```txt
-http://localhost:3000
-```
+https://mohan-ai-portfolio.vercel.app
