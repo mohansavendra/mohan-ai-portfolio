@@ -4329,7 +4329,7 @@
         const utterance = new SpeechSynthesisUtterance(VOICE_INTRO);
         utterance.rate = 0.82;
         utterance.pitch = 1.18;
-        utterance.volume = 0.24;
+        utterance.volume = 0.16;
 
         const selectedVoice = chooseSoftVoice();
         if (selectedVoice) utterance.voice = selectedVoice;
@@ -5473,7 +5473,7 @@
 
   window.speechSynthesis.speak = function (utterance) {
     try {
-      utterance.volume = 0.24;
+      utterance.volume = 0.16;
       utterance.rate = 0.82;
       utterance.pitch = 1.18;
     } catch (error) {}
