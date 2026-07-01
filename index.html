@@ -3338,6 +3338,35 @@
       visibility: hidden !important;
     }
 
+  
+    /* Subtle audio controls */
+    .audio-toggle {
+      position: fixed;
+      left: 20px;
+      bottom: 20px;
+      z-index: 350;
+      width: 46px;
+      height: 46px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(18,20,25,.78);
+      color: var(--soft);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 18px 50px rgba(0,0,0,.24);
+      transition: .22s ease;
+      opacity: .82;
+    }
+
+    .audio-toggle:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+      color: white;
+      border-color: rgba(52,211,153,.30);
+    }
+
   </style>
 </head>
 
@@ -5135,6 +5164,211 @@
   window.addEventListener('load', function () {
     setTimeout(bindCloseButtons, 150);
   });
+})();
+</script>
+
+  <button class="audio-toggle" id="audioToggle" aria-label="Toggle ambient sound" title="Toggle sound">♪</button>
+
+<script id="portfolioAudioLayer">
+(function () {
+  let audioCtx = null;
+  let masterGain = null;
+  let ambientGain = null;
+  let ambientTimer = null;
+  let audioEnabled = true;
+  let ambientStarted = false;
+
+  function ensureAudio() {
+    if (audioCtx) return audioCtx;
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return null;
+
+    audioCtx = new AudioContext();
+
+    masterGain = audioCtx.createGain();
+    masterGain.gain.value = 0.32;
+    masterGain.connect(audioCtx.destination);
+
+    ambientGain = audioCtx.createGain();
+    ambientGain.gain.value = 0.055;
+    ambientGain.connect(masterGain);
+
+    return audioCtx;
+  }
+
+  function resumeAudio() {
+    const ctx = ensureAudio();
+    if (ctx && ctx.state === 'suspended') {
+      ctx.resume().catch(function () {});
+    }
+  }
+
+  function playTapSound() {
+    if (!audioEnabled) return;
+    const ctx = ensureAudio();
+    if (!ctx || !masterGain) return;
+    resumeAudio();
+
+    const now = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    const filter = ctx.createBiquadFilter();
+
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(920, now);
+    osc.frequency.exponentialRampToValueAtTime(360, now + 0.12);
+
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(1800, now);
+
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(0.115, now + 0.012);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
+
+    osc.connect(filter);
+    filter.connect(gain);
+    gain.connect(masterGain);
+
+    osc.start(now);
+    osc.stop(now + 0.2);
+  }
+
+  function playSoftBell(time, freq, duration, volume) {
+    if (!audioEnabled || !audioCtx || !ambientGain) return;
+
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    const filter = audioCtx.createBiquadFilter();
+
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(freq, time);
+
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(1200, time);
+
+    gain.gain.setValueAtTime(0.0001, time);
+    gain.gain.exponentialRampToValueAtTime(volume, time + 0.08);
+    gain.gain.exponentialRampToValueAtTime(0.0001, time + duration);
+
+    osc.connect(filter);
+    filter.connect(gain);
+    gain.connect(ambientGain);
+
+    osc.start(time);
+    osc.stop(time + duration + 0.05);
+  }
+
+  function startAmbientScore() {
+    if (ambientStarted || !audioEnabled) return;
+    const ctx = ensureAudio();
+    if (!ctx) return;
+    resumeAudio();
+
+    ambientStarted = true;
+
+    const scale = [261.63, 329.63, 392.00, 493.88, 392.00, 329.63, 293.66, 349.23];
+    let step = 0;
+
+    function schedulePhrase() {
+      if (!audioEnabled || !audioCtx) return;
+
+      const base = audioCtx.currentTime + 0.08;
+      for (let i = 0; i < 4; i++) {
+        const freq = scale[(step + i) % scale.length];
+        playSoftBell(base + i * 0.72, freq, 1.15, 0.16);
+        playSoftBell(base + i * 0.72 + 0.05, freq / 2, 1.4, 0.055);
+      }
+      step = (step + 2) % scale.length;
+      ambientTimer = setTimeout(schedulePhrase, 4200);
+    }
+
+    schedulePhrase();
+  }
+
+  function stopAmbientScore() {
+    audioEnabled = false;
+    if (ambientTimer) clearTimeout(ambientTimer);
+    ambientTimer = null;
+    if (masterGain && audioCtx) {
+      masterGain.gain.setTargetAtTime(0.0001, audioCtx.currentTime, 0.08);
+    }
+  }
+
+  function enableAudioAgain() {
+    audioEnabled = true;
+    if (masterGain && audioCtx) {
+      masterGain.gain.setTargetAtTime(0.32, audioCtx.currentTime, 0.08);
+    }
+    if (!ambientStarted) startAmbientScore();
+  }
+
+  function startAfterIntroSpeech() {
+    resumeAudio();
+
+    let speechActive = false;
+    try {
+      speechActive = !!(window.speechSynthesis && window.speechSynthesis.speaking);
+    } catch (error) {
+      speechActive = false;
+    }
+
+    if (speechActive && window.speechSynthesis) {
+      const check = setInterval(function () {
+        if (!window.speechSynthesis.speaking) {
+          clearInterval(check);
+          setTimeout(startAmbientScore, 650);
+        }
+      }, 300);
+
+      setTimeout(function () {
+        clearInterval(check);
+        startAmbientScore();
+      }, 12000);
+    } else {
+      setTimeout(startAmbientScore, 1800);
+    }
+  }
+
+  document.addEventListener('click', function (event) {
+    const target = event.target && event.target.closest &&
+      event.target.closest('a, button, .btn, .mode-btn, .role-tab, .why-btn, .sim-step, .terminal-command');
+
+    if (!target) return;
+
+    if (target.id === 'audioToggle') return;
+
+    playTapSound();
+
+    const text = (target.textContent || '').toLowerCase();
+    if (text.includes('enter system') || target.id === 'enterSystem' || target.id === 'enterBtn') {
+      setTimeout(startAfterIntroSpeech, 400);
+    }
+  }, true);
+
+  const toggle = document.getElementById('audioToggle');
+  if (toggle) {
+    toggle.addEventListener('click', function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (audioEnabled) {
+        stopAmbientScore();
+        toggle.textContent = '♪̸';
+        toggle.title = 'Sound off';
+      } else {
+        enableAudioAgain();
+        resumeAudio();
+        toggle.textContent = '♪';
+        toggle.title = 'Sound on';
+      }
+    });
+  }
+
+  window.portfolioAudio = {
+    startAmbientScore: startAmbientScore,
+    stopAmbientScore: stopAmbientScore,
+    playTapSound: playTapSound
+  };
 })();
 </script>
 
