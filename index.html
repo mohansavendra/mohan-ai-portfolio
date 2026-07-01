@@ -3238,6 +3238,34 @@
       }
     }
 
+  
+    .terminal-strip {
+      justify-content: flex-start;
+      background: transparent !important;
+      border: 0 !important;
+      padding: 0 !important;
+      margin-top: 18px !important;
+    }
+
+    .terminal-command {
+      font-family: inherit !important;
+      font-size: 14px !important;
+      font-weight: 800 !important;
+      letter-spacing: 0 !important;
+      border-radius: 999px !important;
+      padding: 12px 16px !important;
+      color: var(--soft) !important;
+      background: rgba(255,255,255,.055) !important;
+      border: 1px solid rgba(255,255,255,.12) !important;
+    }
+
+    .terminal-command:hover {
+      color: white !important;
+      background: rgba(52,211,153,.11) !important;
+      border-color: rgba(52,211,153,.32) !important;
+      transform: translateY(-2px) !important;
+    }
+
   </style>
 </head>
 
@@ -3503,10 +3531,10 @@
             </div>
 
             <div class="terminal-strip">
-              <button class="terminal-command" data-jump="#role-fit">run --role-fit</button>
-              <button class="terminal-command" data-jump="#projects">run --projects</button>
-              <button class="terminal-command" data-jump="#architecture">run --architecture</button>
-              <button class="terminal-command" data-jump="#contact">run --contact</button>
+              <button class="terminal-command" data-jump="#role-fit">View Role Fit</button>
+              <button class="terminal-command" data-jump="#projects">See Projects</button>
+              <button class="terminal-command" data-jump="#architecture">Open Architecture</button>
+              <button class="terminal-command" data-jump="#contact">Contact Mohan</button>
             </div>
           </div>
 
