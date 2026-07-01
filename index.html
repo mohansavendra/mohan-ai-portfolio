@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- NO_PAID_API_STATIC_ASSISTANT: no OpenAI billing required -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -4189,6 +4190,15 @@
         return 'Mohan Savendra Tikkireddy is an AI/ML Engineer, Applied AI, and GenAI Engineer with 4.5+ years architecting agentic AI systems, RAG pipelines, and production ML models across insurance, healthcare, and financial services.';
       }
 
+
+      if (has('contact', 'email', 'phone', 'linkedin', 'github', 'instagram', 'reach mohan')) {
+        return 'You can reach Mohan at mohansavendramst@gmail.com or 475-317-4526. LinkedIn: linkedin.com/in/mohan-savendra-tikkireddy-b59897220. GitHub: github.com/mohansavendra.';
+      }
+
+      if (has('resume', 'cv', 'download resume')) {
+        return 'Use the Download Resume button at the top-right of the portfolio, or the CV button in the Connect row.';
+      }
+
       if (has('achievement', 'achievements', 'award', 'hackqu', 'iit', 'best outgoing')) {
         return 'Mohan’s highlighted achievements:\n\n• 2nd Place — HackQu Fall 2024\n• Best Outgoing Student Award — VIT Chennai\n• Championship Win — IIT Madras';
       }
@@ -4217,19 +4227,13 @@
         return 'Core skills:\n\n• Python, SQL, Bash\n• LangChain, LangGraph, RAG, FAISS, Prompt Engineering\n• PyTorch, TensorFlow, Scikit-learn, FastAPI\n• MLflow, Kubeflow, Docker, Kubernetes, Terraform\n• AWS SageMaker, Azure ML, GCP Vertex AI\n• Neo4j, Cypher, Prometheus, Grafana, Spark';
       }
 
-      return 'I can answer key questions about Mohan’s portfolio. Try asking about his role fit, W. R. Berkley knowledge assistant, clinical NLP, fraud detection, MLOps stack, or achievements.';
+      return 'I do not have that exact detail in Mohan’s portfolio context. I can accurately answer about his role fit, W. R. Berkley agentic assistant, clinical NLP, fraud detection, MLOps stack, projects, skills, achievements, and contact information.';
     }
 
     async function getLiveAnswer(question) {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: question, history: [] })
-      });
-
-      if (!response.ok) throw new Error('No backend available');
-      const data = await response.json();
-      return data.answer || fallbackAnswer(question);
+      // Free no-API version: deterministic, portfolio-grounded assistant.
+      // No OpenAI key required. No paid API calls.
+      return fallbackAnswer(question);
     }
 
     async function sendAssistant() {
@@ -4252,7 +4256,7 @@
         addMessage(answer, 'bot');
       } catch (error) {
         typing.remove();
-        addMessage('The live assistant is not connected yet. After this portfolio is deployed on Vercel with OPENAI_API_KEY, I’ll answer from Mohan’s verified portfolio context.', 'bot');
+        addMessage('I can answer from Mohan’s verified portfolio context. Try asking about his Berkley agentic assistant, clinical NLP, fraud detection, MLOps stack, projects, or role fit.', 'bot');
       }
     }
 
