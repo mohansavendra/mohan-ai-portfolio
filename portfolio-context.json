@@ -1,0 +1,196 @@
+{
+  "name": "Mohan Savendra Tikkireddy",
+  "title": "AI/ML Engineer | Applied AI | GenAI Engineer",
+  "contact": {
+    "email": "mohansavendramst@gmail.com",
+    "phone": "475-317-4526",
+    "linkedin": "https://www.linkedin.com/in/mohan-savendra-tikkireddy-b59897220/",
+    "github": "https://github.com/mohansavendra",
+    "instagram": "https://www.instagram.com/mohan.savendra?igsh=M2d0NTlhNzh2azR1&utm_source=qr"
+  },
+  "profile_summary": "Mohan is an AI/ML Engineer with 4.5+ years of experience building agentic AI systems, RAG pipelines, production ML models, clinical NLP, fraud detection, and MLOps systems across insurance, healthcare, finance, and energy.",
+  "role_fit": [
+    "AI/ML Engineer",
+    "Applied AI Engineer",
+    "GenAI Engineer",
+    "Agentic AI Engineer",
+    "Machine Learning Engineer",
+    "MLOps Engineer",
+    "AI Prompt Engineer"
+  ],
+  "core_strengths": [
+    "Agentic AI systems",
+    "LangChain and LangGraph orchestration",
+    "RAG over FAISS",
+    "FastAPI inference services",
+    "Prompt engineering and LLM workflows",
+    "Clinical NLP",
+    "Fraud detection",
+    "MLflow and Kubeflow pipelines",
+    "Docker and Kubernetes deployment",
+    "Terraform-driven CI/CD",
+    "Prometheus and Grafana monitoring",
+    "Production model reliability and drift monitoring"
+  ],
+  "experience": [
+    {
+      "company": "W. R. Berkley Corporation",
+      "focus": "Agentic AI, RAG, production MLOps, knowledge assistant systems",
+      "highlights": [
+        "Built an agentic knowledge assistant using LangChain/LangGraph and FAISS-based RAG.",
+        "Reduced analyst resolution time by 60%.",
+        "Improved service latency by 42%.",
+        "Supported production MLOps across 12 models.",
+        "Maintained 99.9% uptime for production systems.",
+        "Used FastAPI, evaluation workflows, deployment automation, monitoring, and drift checks."
+      ]
+    },
+    {
+      "company": "Hartford HealthCare",
+      "focus": "Clinical NLP, patient records, clinical RAG, model serving",
+      "highlights": [
+        "Built clinical NLP models across 1M+ patient records.",
+        "Reached 91% AUC on clinical ML workflows.",
+        "Built clinical RAG workflows over 200K+ documents per month.",
+        "Supported sub-100ms model serving using PyTorch and Docker.",
+        "Worked on semi-supervised learning and healthcare AI workflows."
+      ]
+    },
+    {
+      "company": "Northern Trust",
+      "focus": "Fraud detection, financial ML, graph analytics, large-scale data pipelines",
+      "highlights": [
+        "Built fraud detection models over 50M+ records.",
+        "Reached 94% precision in fraud detection workflows.",
+        "Used Neo4j/Cypher for fraud-ring analysis.",
+        "Supported large-scale ML pipelines with MLflow and Kubeflow.",
+        "Worked with large financial datasets and production monitoring."
+      ]
+    },
+    {
+      "company": "Hitachi Energy",
+      "focus": "Forecasting, anomaly detection, industrial ML",
+      "highlights": [
+        "Built time-series forecasting and anomaly detection systems.",
+        "Improved forecasting accuracy to 96%.",
+        "Reduced downtime by 18%.",
+        "Worked with AWS SageMaker-style production ML workflows."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Agentic Knowledge Assistant",
+      "description": "A production-style assistant combining LangChain/LangGraph orchestration, FAISS RAG, FastAPI serving, guardrails, evaluation, and monitoring.",
+      "impact": [
+        "60% analyst resolution-time reduction",
+        "42% latency improvement",
+        "99.9% uptime",
+        "12 production models supported"
+      ],
+      "stack": [
+        "LangChain",
+        "LangGraph",
+        "FAISS",
+        "FastAPI",
+        "MLflow",
+        "Docker",
+        "Kubernetes",
+        "Terraform",
+        "Prometheus",
+        "Grafana"
+      ]
+    },
+    {
+      "name": "Clinical and Fraud ML Intelligence",
+      "description": "Clinical NLP and fraud detection workflows involving document intelligence, graph analytics, model serving, and monitoring.",
+      "impact": [
+        "91% AUC clinical NLP",
+        "94% fraud precision",
+        "1M+ patient records",
+        "50M+ financial records",
+        "200K+ documents per month"
+      ],
+      "stack": [
+        "PyTorch",
+        "Scikit-learn",
+        "FastAPI",
+        "Neo4j",
+        "MLflow",
+        "Kubeflow",
+        "Docker",
+        "RAG"
+      ]
+    }
+  ],
+  "skills": {
+    "languages": [
+      "Python",
+      "SQL",
+      "Bash"
+    ],
+    "ai_llm": [
+      "LangChain",
+      "LangGraph",
+      "RAG",
+      "FAISS",
+      "Prompt Engineering",
+      "LLM Fine-Tuning",
+      "PEFT",
+      "LoRA",
+      "SFT"
+    ],
+    "ml_frameworks": [
+      "PyTorch",
+      "TensorFlow",
+      "Scikit-learn"
+    ],
+    "serving_backend": [
+      "FastAPI",
+      "REST APIs"
+    ],
+    "mlops": [
+      "MLflow",
+      "Kubeflow",
+      "Docker",
+      "Kubernetes",
+      "CI/CD",
+      "Terraform"
+    ],
+    "cloud": [
+      "AWS SageMaker",
+      "AWS Lambda",
+      "AWS S3",
+      "Azure ML",
+      "GCP Vertex AI"
+    ],
+    "data_monitoring": [
+      "Neo4j",
+      "Cypher",
+      "Prometheus",
+      "Grafana",
+      "Spark",
+      "Snowflake"
+    ],
+    "domains": [
+      "Fraud Detection",
+      "Clinical NLP",
+      "Insurance Analytics",
+      "Risk Scoring",
+      "Production Model Monitoring"
+    ]
+  },
+  "judgment_answers": {
+    "why_agentic_ai_over_plain_rag": "Plain RAG can retrieve and answer. Agentic AI can decide what to do next: plan, retrieve, call tools, validate outputs, retry, and escalate when needed. That is why Mohan positions his work around agentic systems, not just document search.",
+    "what_to_improve_if_rebuilt": "The strongest rebuild improvements would be deeper offline evaluation sets, clearer failure categories, stronger cost routing, and tighter feedback loops from analysts and users.",
+    "strongest_production_proof": "The strongest production signals are FastAPI serving, 99.9% uptime, Terraform/Docker/Kubernetes deployment, Prometheus/Grafana monitoring, drift thresholds, and measurable impact."
+  },
+  "assistant_rules": [
+    "Answer only using this portfolio context.",
+    "Do not invent employers, education, visa status, metrics, skills, tools, or claims not listed here.",
+    "If the answer is not available, say: I do not have that detail in Mohan's portfolio context.",
+    "Keep answers concise, human, and recruiter-friendly unless the user asks for technical depth.",
+    "When relevant, mention concrete metrics and shipped production systems.",
+    "Do not say the portfolio was generated from a resume. Speak as Mohan's portfolio assistant."
+  ]
+}
