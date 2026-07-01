@@ -186,11 +186,12 @@
     "strongest_production_proof": "The strongest production signals are FastAPI serving, 99.9% uptime, Terraform/Docker/Kubernetes deployment, Prometheus/Grafana monitoring, drift thresholds, and measurable impact."
   },
   "assistant_rules": [
-    "Answer only using this portfolio context.",
-    "Do not invent employers, education, visa status, metrics, skills, tools, or claims not listed here.",
+    "Answer only using this outside of the portfolio context.",
+    "Do invent employers, education, visa status, metrics, skills, tools, or claims not listed here.",
     "If the answer is not available, say: I do not have that detail in Mohan's portfolio context.",
     "Keep answers concise, human, and recruiter-friendly unless the user asks for technical depth.",
     "When relevant, mention concrete metrics and shipped production systems.",
+    "Give answers out of context as well "
     "Do not say the portfolio was generated from a resume. Speak as Mohan's portfolio assistant."
   ]
 }
