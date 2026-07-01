@@ -3367,6 +3367,53 @@
       border-color: rgba(52,211,153,.30);
     }
 
+  
+    .live-counter-pill {
+      position: fixed;
+      left: 82px;
+      bottom: 20px;
+      z-index: 349;
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(18,20,25,.78);
+      color: var(--soft);
+      padding: 0 15px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 18px 50px rgba(0,0,0,.24);
+      font-size: 13px;
+      font-weight: 800;
+      opacity: .88;
+    }
+
+    .live-counter-pill .counter-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--emerald);
+      box-shadow: 0 0 16px rgba(52,211,153,.85);
+      animation: liveBlink 1.5s ease-in-out infinite;
+      flex: 0 0 auto;
+    }
+
+    .live-counter-pill .counter-number {
+      color: white;
+      font-family: var(--mono);
+    }
+
+    @media (max-width: 720px) {
+      .live-counter-pill {
+        left: 74px;
+        right: 18px;
+        width: auto;
+        justify-content: center;
+        font-size: 12px;
+      }
+    }
+
   </style>
 </head>
 
@@ -5352,6 +5399,51 @@
     stopAmbientScore: stopAmbientScore,
     playTapSound: playTapSound
   };
+})();
+</script>
+
+
+  <div class="live-counter-pill" id="liveCounterPill" aria-label="Portfolio visit counter">
+    <span class="counter-dot"></span>
+    <span>System entries logged:</span>
+    <span class="counter-number" id="liveVisitCount">...</span>
+  </div>
+
+
+<script id="supabaseVisitCounter">
+(function () {
+  const SUPABASE_URL = "https://gaurvopfoqiyselbuysy.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_dtL4XHmO9Ke3F-lcs8bWJQ_kCXvSlA3";
+
+  async function updateVisitCounter() {
+    const countEl = document.getElementById('liveVisitCount');
+    if (!countEl) return;
+
+    try {
+      const response = await fetch(SUPABASE_URL + "/rest/v1/rpc/increment_portfolio_counter", {
+        method: "POST",
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Authorization": "Bearer " + SUPABASE_KEY,
+          "Content-Type": "application/json"
+        },
+        body: "{}"
+      });
+
+      if (!response.ok) throw new Error("counter request failed");
+
+      const count = await response.json();
+      countEl.textContent = Number(count || 0).toLocaleString();
+    } catch (error) {
+      countEl.textContent = "live";
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", updateVisitCounter);
+  } else {
+    updateVisitCounter();
+  }
 })();
 </script>
 
