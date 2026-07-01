@@ -3263,6 +3263,58 @@
       transform: translateY(-2px) !important;
     }
 
+  
+    /* Assistant chat usability fix */
+    .assistant-panel,
+    .assistantPanel,
+    #assistantPanel {
+      max-height: min(760px, calc(100vh - 32px)) !important;
+      display: flex !important;
+      flex-direction: column !important;
+      overflow: hidden !important;
+    }
+
+    .assistant-body,
+    .assistant-messages,
+    .chat-messages,
+    #assistantMessages,
+    #chatMessages {
+      flex: 1 1 auto !important;
+      min-height: 0 !important;
+      overflow-y: auto !important;
+      padding-bottom: 14px !important;
+      overscroll-behavior: contain !important;
+    }
+
+    .assistant-input,
+    .assistant-composer,
+    .chat-input,
+    .chat-composer,
+    #assistantComposer {
+      flex: 0 0 auto !important;
+      position: sticky !important;
+      bottom: 0 !important;
+      z-index: 20 !important;
+      background: rgba(12, 13, 16, .96) !important;
+      backdrop-filter: blur(16px) !important;
+      padding-top: 12px !important;
+    }
+
+    .quick-prompts {
+      flex: 0 0 auto !important;
+      max-height: 130px !important;
+      overflow-y: auto !important;
+      padding-bottom: 2px !important;
+    }
+
+    @media (max-width: 720px) {
+      .assistant-panel,
+      .assistantPanel,
+      #assistantPanel {
+        max-height: calc(100vh - 18px) !important;
+      }
+    }
+
   </style>
 </head>
 
@@ -4910,6 +4962,54 @@
       const target = document.querySelector(btn.dataset.jump);
       if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
+  });
+})();
+</script>
+
+
+<script id="assistantPanelFix">
+(function () {
+  function getMessagesBox() {
+    return document.getElementById('assistantMessages') ||
+           document.getElementById('chatMessages') ||
+           document.querySelector('.assistant-messages') ||
+           document.querySelector('.chat-messages') ||
+           document.querySelector('.assistant-body');
+  }
+
+  function keepChatUsable() {
+    var box = getMessagesBox();
+    if (box) box.scrollTop = box.scrollHeight;
+
+    var input = document.getElementById('assistantInput') ||
+                document.querySelector('.assistant-input input') ||
+                document.querySelector('.chat-input input') ||
+                document.querySelector('input[placeholder*="Ask"]');
+
+    if (input) {
+      input.disabled = false;
+      input.style.pointerEvents = 'auto';
+    }
+  }
+
+  var observerTarget = getMessagesBox();
+  if (observerTarget) {
+    var observer = new MutationObserver(function () {
+      setTimeout(keepChatUsable, 30);
+    });
+    observer.observe(observerTarget, { childList: true, subtree: true });
+  }
+
+  document.addEventListener('click', function () {
+    setTimeout(keepChatUsable, 60);
+  });
+
+  document.addEventListener('keydown', function () {
+    setTimeout(keepChatUsable, 60);
+  });
+
+  window.addEventListener('load', function () {
+    setTimeout(keepChatUsable, 200);
   });
 })();
 </script>
