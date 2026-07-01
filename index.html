@@ -4210,7 +4210,6 @@
       <button class="assistant-close" id="assistantClose">×</button>
     </div>
     <div class="assistant-body" id="assistantBody">
-      <div class="message bot">Click Enter System for a quick walkthrough, or Skip if you want to jump straight in.</div>
     </div>
     <div class="quick-prompts">
       <button data-q="Why is Mohan a strong AI engineer?">AI engineer fit</button>
@@ -4274,7 +4273,7 @@
 
     if (enterSystem) enterSystem.textContent = 'Enter System';
     if (skipBoot) skipBoot.textContent = 'Skip';
-    if (bootNote) bootNote.textContent = 'Click Enter System for a quick walkthrough, or Skip if you want to jump straight in.';
+    if (bootNote) bootNote.textContent = 'Ask me about Mohan’s AI/ML work, projects, skills, metrics, or contact information.';
 
     function setStatus(text) {
       if (bootStatus) bootStatus.textContent = text;
@@ -4367,7 +4366,7 @@
         const note = document.createElement('div');
         note.id = 'welcomeNote';
         note.className = 'welcome-note';
-        note.textContent = 'Click Enter System for a quick walkthrough, or Skip if you want to jump straight in.';
+        note.textContent = 'Ask me about Mohan’s AI/ML work, projects, skills, metrics, or contact information.';
 
         const terminalTarget = terminal || bootPanel.firstElementChild;
         if (terminalTarget && terminalTarget.parentNode) {
