@@ -4327,9 +4327,9 @@
         window.speechSynthesis.cancel();
 
         const utterance = new SpeechSynthesisUtterance(VOICE_INTRO);
-        utterance.rate = 0.88;
-        utterance.pitch = 1.35;
-        utterance.volume = 0.34;
+        utterance.rate = 0.82;
+        utterance.pitch = 1.18;
+        utterance.volume = 0.24;
 
         const selectedVoice = chooseSoftVoice();
         if (selectedVoice) utterance.voice = selectedVoice;
@@ -5460,6 +5460,26 @@
   });
 
   setInterval(enforceText, 1500);
+})();
+</script>
+
+
+<script id="softVoiceFinalTune">
+(function () {
+  const originalSpeak = window.speechSynthesis && window.speechSynthesis.speak;
+  if (!originalSpeak || window.__softVoiceFinalTuneApplied) return;
+
+  window.__softVoiceFinalTuneApplied = true;
+
+  window.speechSynthesis.speak = function (utterance) {
+    try {
+      utterance.volume = 0.24;
+      utterance.rate = 0.82;
+      utterance.pitch = 1.18;
+    } catch (error) {}
+
+    return originalSpeak.call(window.speechSynthesis, utterance);
+  };
 })();
 </script>
 
