@@ -3668,10 +3668,11 @@
       <div class="message bot">Click Enter System for a quick walkthrough, or Skip if you want to jump straight in.</div>
     </div>
     <div class="quick-prompts">
-      <button data-q="Why agentic AI over plain RAG?">Why agentic AI?</button>
-      <button data-q="What would Mohan improve if he rebuilt the Berkley project?">Rebuild choices</button>
-      <button data-q="Which project proves production readiness best?">Production proof</button>
-      <button data-q="Where is Mohan strongest technically?">Strongest signal</button>
+      <button data-q="Why is Mohan a strong AI engineer?">AI engineer fit</button>
+      <button data-q="What did Mohan build at W. R. Berkley?">Berkley project</button>
+      <button data-q="Does Mohan have production MLOps experience?">MLOps proof</button>
+      <button data-q="What are Mohan's strongest skills?">Strongest skills</button>
+      <button data-q="How can I contact Mohan?">Contact</button>
     </div>
     <div class="assistant-input">
       <input id="assistantInput" placeholder="Ask about Mohan, projects, role fit..." />
@@ -4156,79 +4157,151 @@
       assistantBody.scrollTop = assistantBody.scrollHeight;
     }
 
-    function fallbackAnswer(q) {
-      const normalized = q.toLowerCase().replace(/[?!.]/g, '').replace(/\s+/g, ' ').trim();
-      const has = function () {
+    
+    function fallbackAnswer(question) {
+      const q = String(question || '').toLowerCase();
+
+      function has() {
         return Array.from(arguments).some(function (term) {
-          return normalized.includes(term);
+          return q.includes(String(term).toLowerCase());
         });
-      };
-
-      if (/^(hi|hello|hey|yo|good morning|good afternoon|good evening)(\s|$)/i.test(normalized)) {
-        return ASSISTANT_LINE;
       }
 
-
-      if (has('why agentic ai', 'agentic ai over plain rag', 'plain rag')) {
-        return 'Plain RAG can retrieve and answer. Agentic AI can decide what to do next. For Mohan’s Berkley-style work, that matters because the system is not only searching documents — it is planning, retrieving, calling tools, checking grounding, and producing an answer that analysts can actually use.';
+      function outsidePortfolio() {
+        return 'I’m Mohan’s portfolio assistant, so I can only answer about his AI/ML work, projects, skills, experience, achievements, and contact information.';
       }
 
-      if (has('rebuilt', 'rebuild', 'improve if he rebuilt', 'rebuild choices')) {
-        return 'If Mohan rebuilt the Berkley project, the strongest upgrades would be stronger offline eval sets, clearer failure taxonomies, better cost routing between models, and deeper feedback loops from analysts. That shows judgment: not just building the assistant, but knowing how to make it safer and cheaper over time.';
+      if (!q.trim()) {
+        return 'Ask me about Mohan’s AI/ML experience, agentic AI work, RAG systems, clinical NLP, fraud detection, MLOps stack, projects, or contact information.';
       }
 
-      if (has('production proof', 'production readiness', 'proves production')) {
-        return 'The strongest production-readiness signals are the FastAPI inference backend, 99.9% uptime, Terraform/Docker/Kubernetes CI/CD, Prometheus/Grafana monitoring, drift thresholds, and measurable impact like 60% resolution-time reduction and 42% latency improvement.';
+      if (has('weather', 'stock price', 'news', 'sports', 'recipe', 'movie', 'song', 'joke', 'travel', 'restaurant', 'ceo of', 'president', 'write code for me', 'homework', 'math problem')) {
+        return outsidePortfolio();
       }
 
-      if (has('strongest signal', 'strongest technically', 'where is mohan strongest')) {
-        return 'Mohan’s strongest technical signal is the overlap of agentic AI + RAG + MLOps. A lot of candidates show one of those. His profile connects LangChain/LangGraph orchestration, FAISS retrieval, FastAPI serving, monitoring, and deployment into production-style systems.';
+      if (has('visa', 'work authorization', 'sponsorship', 'h1b', 'opt', 'stem opt', 'green card', 'citizen')) {
+        return 'I do not have verified work-authorization details in Mohan’s portfolio context. For hiring logistics, please contact Mohan directly at mohansavendramst@gmail.com.';
       }
 
-
-      if (has('who is mohan', 'do you know mohan', 'tell me about mohan', 'about mohan')) {
-        return 'Mohan Savendra Tikkireddy is an AI/ML Engineer, Applied AI, and GenAI Engineer with 4.5+ years architecting agentic AI systems, RAG pipelines, and production ML models across insurance, healthcare, and financial services.';
+      if (has('gpa', 'salary', 'expected salary', 'date of birth', 'age', 'address', 'personal address')) {
+        return 'I do not have that personal detail in Mohan’s portfolio context. I can help with his AI/ML experience, projects, skills, and contact information.';
       }
 
-
-      if (has('contact', 'email', 'phone', 'linkedin', 'github', 'instagram', 'reach mohan')) {
+      if (has('contact', 'email', 'phone', 'linkedin', 'github', 'instagram', 'reach mohan', 'call mohan')) {
         return 'You can reach Mohan at mohansavendramst@gmail.com or 475-317-4526. LinkedIn: linkedin.com/in/mohan-savendra-tikkireddy-b59897220. GitHub: github.com/mohansavendra.';
       }
 
-      if (has('resume', 'cv', 'download resume')) {
+      if (has('resume', 'cv', 'download resume', 'download cv')) {
         return 'Use the Download Resume button at the top-right of the portfolio, or the CV button in the Connect row.';
       }
 
-      if (has('achievement', 'achievements', 'award', 'hackqu', 'iit', 'best outgoing')) {
-        return 'Mohan’s highlighted achievements:\n\n• 2nd Place — HackQu Fall 2024\n• Best Outgoing Student Award — VIT Chennai\n• Championship Win — IIT Madras';
+      if (has('who is mohan', 'about mohan', 'tell me about mohan', 'introduce mohan', 'summary', 'profile')) {
+        return 'Mohan Savendra Tikkireddy is an AI/ML Engineer with 4.5+ years of experience across agentic AI, RAG, production ML, clinical NLP, fraud detection, and MLOps. His portfolio focuses on shipped systems with measurable impact across insurance, healthcare, finance, and energy.';
       }
 
-      if (has('role', 'fit', 'job')) {
-        return 'Best role fit:\n\n1. AI/ML Engineer\n2. Applied AI Engineer\n3. GenAI Engineer\n4. Agentic AI Engineer\n5. Machine Learning Engineer\n6. MLOps / AI Platform Engineer';
+      if (has('currently working', 'where mohan is working', 'where is mohan working', 'current company', 'current role', 'work now', 'working now')) {
+        return 'Mohan’s current focus is AI/ML engineering work around W. R. Berkley-style insurance AI systems: agentic AI, RAG, production MLOps, FastAPI services, monitoring, and reliable ML deployment. His strongest recent work is an agentic knowledge assistant using LangChain/LangGraph and FAISS-based retrieval.';
       }
 
-      if (has('berkley', 'knowledge assistant', 'agentic', 'langgraph')) {
-        return 'At W. R. Berkley, Mohan built a LangChain/LangGraph agentic knowledge assistant with RAG over FAISS, reducing analyst resolution time by 60%, improving latency by 42%, and sustaining 99.9% uptime.';
+      if (has('company', 'companies', 'experience companies', 'worked at', 'employers')) {
+        return 'Mohan’s portfolio highlights work across W. R. Berkley, Hartford HealthCare, Northern Trust, and Hitachi Energy. The work covers insurance AI, healthcare NLP, financial fraud detection, production MLOps, forecasting, and anomaly detection.';
       }
 
-      if (has('clinical', 'healthcare', 'hartford', 'ehr')) {
-        return 'At Hartford HealthCare, Mohan built clinical NLP over EHR notes with 91% AUC across 1M+ records, deployed sub-100ms PyTorch inference, and built clinical RAG with 89% retrieval accuracy across 200K+ documents/month.';
+      if (has('is he good ai engineer', 'good ai engineer', 'is mohan good', 'good fit', 'strong candidate', 'should we hire', 'hire him', 'why hire', 'why should we hire')) {
+        return 'Yes — Mohan shows strong AI engineering signal because his work goes beyond notebooks. He has shipped agentic AI, RAG, clinical NLP, fraud detection, FastAPI inference, MLflow/Kubeflow pipelines, Docker/Kubernetes deployment, Terraform CI/CD, and monitoring. The proof is measurable: 60% analyst resolution-time reduction, 42% latency improvement, 94% fraud precision, 91% clinical AUC, and 99.9% production uptime.';
       }
 
-      if (has('fraud', 'northern', 'risk')) {
-        return 'At Northern Trust, Mohan built fraud detection over 50M+ transactions, reaching 94% precision, and used MLflow/Kubeflow plus Neo4j/Cypher entity resolution for production risk workflows.';
+      if (has('role fit', 'fit for', 'ai engineer role', 'ai/ml engineer', 'applied ai', 'genai engineer', 'agentic ai engineer', 'machine learning engineer', 'mlops engineer', 'prompt engineer')) {
+        return 'Mohan is strongest for AI/ML Engineer, Applied AI Engineer, GenAI Engineer, Agentic AI Engineer, Machine Learning Engineer, MLOps Engineer, and AI Prompt Engineer roles. His best fit is teams building production AI systems with RAG, agents, model serving, monitoring, and measurable business impact.';
       }
 
-      if (has('mlops', 'docker', 'kubernetes', 'terraform', 'mlflow', 'kubeflow')) {
-        return 'Mohan’s MLOps stack includes MLflow, Kubeflow, Docker, Kubernetes, CI/CD, Terraform, Prometheus, Grafana, drift monitoring, retraining triggers, and production deployment workflows.';
+      if (has('strength', 'strongest', 'best skill', 'best at', 'technical strength', 'strongest signal')) {
+        return 'Mohan’s strongest area is the overlap of agentic AI, RAG, and production MLOps. He can connect LangChain/LangGraph orchestration, FAISS retrieval, FastAPI serving, monitoring, CI/CD, and business metrics into shipped systems.';
       }
 
-      if (has('skill', 'skills', 'tech stack', 'tools')) {
-        return 'Core skills:\n\n• Python, SQL, Bash\n• LangChain, LangGraph, RAG, FAISS, Prompt Engineering\n• PyTorch, TensorFlow, Scikit-learn, FastAPI\n• MLflow, Kubeflow, Docker, Kubernetes, Terraform\n• AWS SageMaker, Azure ML, GCP Vertex AI\n• Neo4j, Cypher, Prometheus, Grafana, Spark';
+      if (has('weakness', 'risk', 'concern', 'gap', 'missing')) {
+        return 'The main thing to validate in interviews is depth by project: ask Mohan to walk through architecture decisions, failure handling, evaluation, monitoring, and tradeoffs. His portfolio gives strong production signals, but a technical screen should confirm ownership and implementation depth.';
       }
 
-      return 'I do not have that exact detail in Mohan’s portfolio context. I can accurately answer about his role fit, W. R. Berkley agentic assistant, clinical NLP, fraud detection, MLOps stack, projects, skills, achievements, and contact information.';
+      if (has('berkley', 'w r berkley', 'wr berkley', 'knowledge assistant', 'agentic assistant')) {
+        return 'At W. R. Berkley, Mohan worked on an agentic knowledge assistant using LangChain/LangGraph orchestration and FAISS-based RAG. The system connected retrieval, tool-style workflows, FastAPI serving, evaluation, deployment automation, monitoring, and drift checks. It reduced analyst resolution time by 60%, improved latency by 42%, and supported production MLOps across 12 models with 99.9% uptime.';
+      }
+
+      if (has('hartford', 'healthcare', 'clinical nlp', 'patient records', 'clinical rag', 'ehr')) {
+        return 'At Hartford HealthCare, Mohan worked on clinical NLP and clinical RAG workflows. The portfolio highlights models across 1M+ patient records, 91% AUC, RAG over 200K+ documents per month, and sub-100ms model serving using PyTorch and Docker.';
+      }
+
+      if (has('northern trust', 'fraud', 'fraud detection', 'financial ml', 'fraud ring', 'neo4j', 'cypher')) {
+        return 'At Northern Trust, Mohan worked on fraud detection and financial ML systems over 50M+ records. The portfolio highlights 94% fraud precision, Neo4j/Cypher fraud-ring analysis, and large-scale ML pipelines with MLflow and Kubeflow.';
+      }
+
+      if (has('hitachi', 'energy', 'forecasting', 'anomaly', 'anomaly detection', 'time series', 'downtime')) {
+        return 'At Hitachi Energy, Mohan worked on time-series forecasting and anomaly detection systems. The portfolio highlights 96% forecasting accuracy and an 18% downtime reduction through industrial ML workflows.';
+      }
+
+      if (has('what did mohan build', 'what has mohan built', 'projects built', 'main projects', 'flagship project', 'best project', 'strongest project')) {
+        return 'Mohan’s strongest builds are an agentic knowledge assistant, clinical NLP workflows, fraud detection systems, RAG pipelines, and production MLOps infrastructure. The work spans LangChain/LangGraph, FAISS, FastAPI, PyTorch, MLflow, Kubeflow, Docker, Kubernetes, Terraform, Prometheus, Grafana, Neo4j, and cloud ML workflows.';
+      }
+
+      if (has('project', 'case study', 'portfolio project')) {
+        return 'The portfolio centers on two flagship systems: an agentic knowledge assistant and clinical/fraud ML intelligence workflows. Together they show RAG, agents, FastAPI serving, evaluation, monitoring, graph analytics, clinical NLP, fraud detection, and production MLOps.';
+      }
+
+      if (has('rag', 'retrieval', 'faiss', 'vector', 'vector db', 'embedding')) {
+        return 'Mohan has strong RAG experience through FAISS-based retrieval, document intelligence, clinical RAG, and agentic knowledge-assistant workflows. His RAG work is tied to production-style systems, not just demos: retrieval, serving, evaluation, monitoring, and measurable impact.';
+      }
+
+      if (has('agent', 'agentic', 'langgraph', 'langchain', 'tool calling', 'multi-agent', 'orchestration')) {
+        return 'Mohan’s agentic AI work uses LangChain and LangGraph-style orchestration for planner/retriever/tool workflows, RAG grounding, FastAPI serving, guardrails, retries, evaluation, and monitoring. The strongest example is the W. R. Berkley agentic knowledge assistant.';
+      }
+
+      if (has('mlops', 'production', 'deployment', 'deploy', 'ci/cd', 'terraform', 'docker', 'kubernetes', 'monitoring', 'drift', 'prometheus', 'grafana', 'uptime')) {
+        return 'Mohan has production MLOps experience across FastAPI serving, Docker/Kubernetes deployment, Terraform-driven CI/CD, MLflow/Kubeflow pipelines, Prometheus/Grafana monitoring, drift checks, and reliability work. The portfolio highlights 99.9% uptime and production support across 12 models.';
+      }
+
+      if (has('fastapi', 'api', 'backend', 'serving', 'inference')) {
+        return 'Mohan uses FastAPI for production-style ML/AI serving, including inference services, assistant backends, and low-latency model workflows. The portfolio highlights a 42% latency improvement and sub-100ms serving work in clinical ML.';
+      }
+
+      if (has('skills', 'tech stack', 'tools', 'technologies', 'stack')) {
+        return 'Mohan’s stack includes Python, SQL, LangChain, LangGraph, RAG, FAISS, FastAPI, PyTorch, TensorFlow, Scikit-learn, MLflow, Kubeflow, Docker, Kubernetes, Terraform, AWS, Azure ML, GCP Vertex AI, Neo4j, Spark, Snowflake, Prometheus, and Grafana.';
+      }
+
+      if (has('python', 'sql', 'pytorch', 'tensorflow', 'scikit', 'sklearn')) {
+        return 'Yes. Mohan’s portfolio includes Python, SQL, PyTorch, TensorFlow, and Scikit-learn across AI/ML engineering, clinical NLP, fraud detection, forecasting, and production inference workflows.';
+      }
+
+      if (has('aws', 'azure', 'gcp', 'cloud', 'sagemaker', 'vertex')) {
+        return 'Mohan’s portfolio includes cloud ML experience across AWS-style ML workflows, Azure ML, and GCP Vertex AI. The strongest signals are deployment, data/ML pipelines, monitoring, and production AI infrastructure rather than only cloud certification keywords.';
+      }
+
+      if (has('impact', 'metrics', 'numbers', 'results', 'business impact')) {
+        return 'Key impact metrics include 60% analyst resolution-time reduction, 42% latency improvement, 94% fraud precision, 91% clinical AUC, 96% forecasting accuracy, 18% downtime reduction, 99.9% uptime, 12 production models supported, 1M+ patient records, 50M+ financial records, and 200K+ documents per month.';
+      }
+
+      if (has('achievement', 'achievements', 'certification', 'certifications', 'award')) {
+        return 'The portfolio emphasizes measurable engineering achievements: production AI systems, RAG and agentic workflows, clinical NLP, fraud detection, model monitoring, deployment automation, and strong metrics across multiple domains. For formal certifications or awards, use the resume download if listed there.';
+      }
+
+      if (has('education', 'degree', 'school', 'university', 'masters', 'bachelors')) {
+        return 'I do not have verified education details in this portfolio context. Please use Mohan’s resume download or contact him directly for education details.';
+      }
+
+      if (has('why agentic ai', 'agentic ai over plain rag', 'plain rag')) {
+        return 'Plain RAG can retrieve and answer. Agentic AI can decide what to do next: plan, retrieve, call tools, validate outputs, retry, and escalate when needed. That is why Mohan positions his work around agentic systems, not just document search.';
+      }
+
+      if (has('rebuilt', 'rebuild', 'improve if he rebuilt', 'rebuild choices')) {
+        return 'If Mohan rebuilt the Berkley-style assistant, the strongest upgrades would be deeper offline evaluation sets, clearer failure categories, better cost routing between models, and tighter feedback loops from analysts. That shows judgment beyond just building the first version.';
+      }
+
+      if (has('production proof', 'production readiness', 'proves production')) {
+        return 'The strongest production-readiness signals are FastAPI serving, 99.9% uptime, Terraform/Docker/Kubernetes deployment, Prometheus/Grafana monitoring, drift thresholds, and measurable impact like 60% resolution-time reduction and 42% latency improvement.';
+      }
+
+      return outsidePortfolio() + ' Try asking about W. R. Berkley, RAG, LangGraph, clinical NLP, fraud detection, MLOps, skills, metrics, projects, or contact information.';
     }
+
 
     async function getLiveAnswer(question) {
       // Free no-API version: deterministic, portfolio-grounded assistant.
