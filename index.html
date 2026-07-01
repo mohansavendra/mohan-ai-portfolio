@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- NO_PAID_API_STATIC_ASSISTANT: no OpenAI billing required -->
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -113,7 +113,7 @@
       to { transform: translate3d(48px, 34px,0) scale(1.15); }
     }
 
-    /* AI Runtime opening animation */
+    
     .boot {
       position: fixed;
       inset: 0;
@@ -551,7 +551,6 @@
       justify-content: center;
     }
 
-
     .side-dashboard {
       grid-column: 2;
       display: grid;
@@ -956,8 +955,6 @@
       from { scale: .95; }
       to { scale: 1.08; }
     }
-
-
 
     .agentic-visual,
     .clinical-visual {
@@ -1946,7 +1943,7 @@
       .terminal { font-size: 12px; min-height: 290px; }
     }
   
-    /* v3 fix: keep cards completely off the portrait */
+    
     .visual {
       min-height: auto !important;
       display: grid !important;
@@ -2046,7 +2043,7 @@
     }
 
   
-    /* Stable unique upgrades */
+    
     .mode-strip {
       margin-top: 28px;
       display: flex;
@@ -2504,7 +2501,7 @@
     }
 
   
-    /* Standout UX upgrades */
+    
     .assistant-nudge {
       position: fixed;
       right: 24px;
@@ -2770,7 +2767,7 @@
     }
 
   
-    /* View mode toggle hard fix */
+    
     .mode-strip,
     .mode-strip * {
       pointer-events: auto !important;
@@ -2820,7 +2817,7 @@
     }
 
   
-    /* Professional stack section */
+    
     .tech-cloud.stack-groups {
       display: grid;
       grid-template-columns: 1fr;
@@ -2977,7 +2974,7 @@
     }
 
   
-    /* Advanced standout sections */
+    
     .advanced-lab {
       padding: 92px 0;
       position: relative;
@@ -3449,7 +3446,6 @@
       </div>
     </section>
 
-
     <section id="role-fit" class="scroll-reveal">
       <div class="container">
         <div class="section-head">
@@ -3593,7 +3589,6 @@
         </div>
       </div>
     </section>
-
 
     <section id="projects" class="scroll-reveal">
       <div class="container">
@@ -4044,7 +4039,6 @@
     </div>
   </footer>
 
-
   <div class="case-modal" id="caseModal">
     <div class="modal-card">
       <button class="modal-close" id="modalClose">×</button>
@@ -4091,10 +4085,6 @@
   }
 
   ready(function () {
-    // Requested ElevenLabs voice reference:
-    // Voice ID: OHY6EjdeHKeQymoihwfz
-    // HTML-only uses browser speech. To use this exact ElevenLabs voice,
-    // generate an MP3 from ElevenLabs or call ElevenLabs from a secure backend.
     const ELEVENLABS_VOICE_ID = "OHY6EjdeHKeQymoihwfz";
 
     const VOICE_INTRO =
@@ -4195,7 +4185,6 @@
 
         window.speechSynthesis.speak(utterance);
       } catch (error) {
-        // Voice is optional; portfolio still works without it.
       }
     }
 
@@ -4277,7 +4266,6 @@
         }
       }
     }
-
 
     function updateRuntimeCard() {
       const lastUpdated = document.getElementById('lastUpdatedRuntime');
@@ -4438,7 +4426,6 @@
     updateRuntimeCard();
     setupAssistantNudge();
 
-    // Scroll reveal
     if ('IntersectionObserver' in window) {
       const revealObserver = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
@@ -4461,7 +4448,6 @@
     window.addEventListener('scroll', revealVisibleSections);
     window.addEventListener('resize', revealVisibleSections);
 
-    // Recruiter / Engineer view toggle
     document.querySelectorAll('.mode-btn').forEach(function (btn) {
       btn.addEventListener('click', function () {
         const mode = btn.dataset.mode;
@@ -4474,7 +4460,6 @@
       });
     });
 
-    // Case study modal
     const caseData = {
       agentops: {
         kicker: 'Case Study · Agentic AI',
@@ -4540,7 +4525,6 @@
       });
     }
 
-    // HTML-only assistant fallback
     const assistantFab = document.getElementById('assistantFab');
     const assistantPanel = document.getElementById('assistantPanel');
     const assistantClose = document.getElementById('assistantClose');
@@ -4702,10 +4686,7 @@
       return outsidePortfolio() + ' Try asking about W. R. Berkley, RAG, LangGraph, clinical NLP, fraud detection, MLOps, skills, metrics, projects, or contact information.';
     }
 
-
     async function getLiveAnswer(question) {
-      // Free no-API version: deterministic, portfolio-grounded assistant.
-      // No OpenAI key required. No paid API calls.
       return fallbackAnswer(question);
     }
 
@@ -4768,13 +4749,12 @@
 })();
 </script>
 
-
   <div class="assistant-nudge" id="assistantNudge">
     <strong>Psst — ask me anything.</strong><br/>
     Try “Why agentic AI over plain RAG?” or “What did Mohan actually ship?”
   </div>
 
-<script id="modeToggleRepair">
+<script id="viewModeToggle">
 (function () {
   function initViewModeToggle() {
     var buttons = Array.from(document.querySelectorAll('.mode-btn'));
@@ -4839,8 +4819,7 @@
 })();
 </script>
 
-
-<script id="advancedStandoutFeatures">
+<script id="portfolioInteractions">
 (function () {
   const simCopy = [
     '<strong>User Query:</strong> A recruiter or analyst asks a question. The system treats it as a task, not just a prompt.',
