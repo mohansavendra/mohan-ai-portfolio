@@ -3315,6 +3315,29 @@
       }
     }
 
+  
+    /* Assistant close button fix */
+    .assistant-close,
+    .assistantClose,
+    #assistantClose,
+    [data-assistant-close],
+    .chat-close,
+    .close-assistant {
+      position: relative !important;
+      z-index: 9999 !important;
+      pointer-events: auto !important;
+      cursor: pointer !important;
+    }
+
+    .assistant-panel.closed,
+    .assistantPanel.closed,
+    #assistantPanel.closed {
+      display: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      visibility: hidden !important;
+    }
+
   </style>
 </head>
 
@@ -5010,6 +5033,107 @@
 
   window.addEventListener('load', function () {
     setTimeout(keepChatUsable, 200);
+  });
+})();
+</script>
+
+
+<script id="assistantCloseFix">
+(function () {
+  function getPanel() {
+    return document.getElementById('assistantPanel') ||
+           document.querySelector('.assistant-panel') ||
+           document.querySelector('.assistantPanel') ||
+           document.querySelector('.chat-panel');
+  }
+
+  function closePanel(event) {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    var panel = getPanel();
+    if (!panel) return false;
+
+    panel.classList.remove('open', 'active', 'show', 'visible');
+    panel.classList.add('closed');
+    panel.style.display = 'none';
+    panel.style.opacity = '0';
+    panel.style.pointerEvents = 'none';
+    panel.style.visibility = 'hidden';
+
+    document.body.dataset.assistantOpened = 'false';
+    return false;
+  }
+
+  function openPanel() {
+    var panel = getPanel();
+    if (!panel) return;
+    panel.classList.remove('closed');
+    panel.style.display = '';
+    panel.style.opacity = '';
+    panel.style.pointerEvents = '';
+    panel.style.visibility = '';
+    panel.classList.add('open');
+    document.body.dataset.assistantOpened = 'true';
+  }
+
+  function bindCloseButtons() {
+    var selectors = [
+      '#assistantClose',
+      '.assistant-close',
+      '.assistantClose',
+      '[data-assistant-close]',
+      '.chat-close',
+      '.close-assistant',
+      'button[aria-label="Close assistant"]',
+      'button[aria-label="Close"]'
+    ];
+
+    document.querySelectorAll(selectors.join(',')).forEach(function (btn) {
+      btn.onclick = closePanel;
+      btn.addEventListener('click', closePanel, true);
+      btn.style.pointerEvents = 'auto';
+      btn.style.cursor = 'pointer';
+    });
+
+    var fab = document.getElementById('assistantFab') ||
+              document.querySelector('.assistant-fab') ||
+              document.querySelector('.assistantFab');
+
+    if (fab && !fab.dataset.closeFixBound) {
+      fab.dataset.closeFixBound = 'true';
+      fab.addEventListener('click', function () {
+        var panel = getPanel();
+        if (!panel) return;
+        if (panel.classList.contains('closed') || panel.style.display === 'none') {
+          setTimeout(openPanel, 0);
+        }
+      }, true);
+    }
+  }
+
+  document.addEventListener('click', function (event) {
+    var target = event.target;
+    if (!target) return;
+
+    var closeTarget = target.closest && target.closest('#assistantClose, .assistant-close, .assistantClose, [data-assistant-close], .chat-close, .close-assistant, button[aria-label="Close assistant"], button[aria-label="Close"]');
+    if (closeTarget) closePanel(event);
+  }, true);
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') closePanel(event);
+  });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bindCloseButtons);
+  } else {
+    bindCloseButtons();
+  }
+
+  window.addEventListener('load', function () {
+    setTimeout(bindCloseButtons, 150);
   });
 })();
 </script>
