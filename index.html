@@ -3531,8 +3531,8 @@
               <div class="runtime-value" id="lastUpdatedRuntime">Loading timestamp...</div>
             </div>
             <div class="runtime-item">
-              <div class="runtime-label">Visit signal</div>
-              <div class="runtime-value" id="visitCounterRuntime">Preparing session...</div>
+              <div class="runtime-label">System entries logged</div>
+              <div class="runtime-value" id="visitCounterRuntime">Loading total visits...</div>
             </div>
           </div>
 
@@ -4432,15 +4432,8 @@
         }) + ' — active portfolio build';
       }
 
-      try {
-        const key = 'mohan_portfolio_visit_count';
-        const nextVisit = (parseInt(localStorage.getItem(key) || '0', 10) + 1);
-        localStorage.setItem(key, String(nextVisit));
-        if (visitCounter) {
-          visitCounter.textContent = 'Visit #' + nextVisit + ' on this device';
-        }
-      } catch (error) {
-        if (visitCounter) visitCounter.textContent = 'Session active';
+      if (visitCounter) {
+        visitCounter.textContent = 'Loading total visits...';
       }
     }
 
@@ -5402,22 +5395,28 @@
 })();
 </script>
 
-
-  <div class="live-counter-pill" id="liveCounterPill" aria-label="Portfolio visit counter">
-    <span class="counter-dot"></span>
-    <span>System entries logged:</span>
-    <span class="counter-number" id="liveVisitCount">...</span>
-  </div>
-
-
-<script id="supabaseVisitCounter">
+<script id="supabaseCounterFinalOverride">
 (function () {
   const SUPABASE_URL = "https://gaurvopfoqiyselbuysy.supabase.co";
   const SUPABASE_KEY = "sb_publishable_dtL4XHmO9Ke3F-lcs8bWJQ_kCXvSlA3";
+  let latestDisplay = "";
 
-  async function updateVisitCounter() {
-    const countEl = document.getElementById('liveVisitCount');
-    if (!countEl) return;
+  function targets() {
+    return [
+      document.getElementById("visitCounterRuntime"),
+      document.getElementById("liveVisitCount")
+    ].filter(Boolean);
+  }
+
+  function setCounterText(text) {
+    latestDisplay = text;
+    targets().forEach(function (el) {
+      el.textContent = text;
+    });
+  }
+
+  async function incrementAndShowCounter() {
+    setCounterText("Loading total visits...");
 
     try {
       const response = await fetch(SUPABASE_URL + "/rest/v1/rpc/increment_portfolio_counter", {
@@ -5430,20 +5429,37 @@
         body: "{}"
       });
 
-      if (!response.ok) throw new Error("counter request failed");
+      if (!response.ok) throw new Error("Counter request failed");
 
       const count = await response.json();
-      countEl.textContent = Number(count || 0).toLocaleString();
+      setCounterText(Number(count || 0).toLocaleString() + " total visits");
     } catch (error) {
-      countEl.textContent = "live";
+      setCounterText("Counter connecting...");
     }
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", updateVisitCounter);
-  } else {
-    updateVisitCounter();
+  function enforceText() {
+    if (!latestDisplay) return;
+    targets().forEach(function (el) {
+      if (/on this device/i.test(el.textContent) || /Visit #/i.test(el.textContent) || el.textContent !== latestDisplay) {
+        el.textContent = latestDisplay;
+      }
+    });
   }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", incrementAndShowCounter);
+  } else {
+    incrementAndShowCounter();
+  }
+
+  window.addEventListener("load", function () {
+    setTimeout(enforceText, 300);
+    setTimeout(enforceText, 1000);
+    setTimeout(enforceText, 2500);
+  });
+
+  setInterval(enforceText, 1500);
 })();
 </script>
 
