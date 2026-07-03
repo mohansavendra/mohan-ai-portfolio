@@ -6,9 +6,6 @@ The site is designed to make technical work easier to explore through an interac
 
 ## What it includes
 
-Note: The public portfolio intentionally does not expose or download Mohan’s resume.
-
-
 - Recruiter and engineer view modes
 - Project case studies
 - Interactive system lab
