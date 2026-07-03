@@ -2,7 +2,7 @@
 
 A personal AI/ML engineering portfolio for Mohan Savendra Tikkireddy.
 
-The site is designed to make technical work easier to explore through an interactive portfolio experience instead of a public resume page.
+The site is designed to make technical work easier to explore through an interactive portfolio experience instead.
 
 ## What it includes
 
